@@ -1,5 +1,8 @@
+"use client"
+
+import { useState } from "react"
 import Link from "next/link"
-import { ExternalLink } from "lucide-react"
+import { ChevronDown, ChevronUp, ExternalLink } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
@@ -12,9 +15,12 @@ interface Publication {
 }
 
 export default function Publications() {
+  const [showAll, setShowAll] = useState(false)
+
   const publications: Publication[] = [
     {
-      title: "IWSHAP: Um Método de Seleção Incremental de Características para Redes CAN baseado em Inteligência Artificial Explicável (XAI)",
+      title:
+        "IWSHAP: Um Método de Seleção Incremental de Características para Redes CAN baseado em Inteligência Artificial Explicável (XAI)",
       journal: "Simpósio Brasileiro de Segurança da Informação e de Sistemas Computacionais",
       year: "2025",
       description:
@@ -22,7 +28,8 @@ export default function Publications() {
       url: "#",
     },
     {
-      title: "Modelos Interpretáveis com Inteligência Artificial Explicável (XAI) na Detecção de Intrusões em Redes Intra-Veiculares Controller Area Network (CAN)",
+      title:
+        "Modelos Interpretáveis com Inteligência Artificial Explicável (XAI) na Detecção de Intrusões em Redes Intra-Veiculares Controller Area Network (CAN)",
       journal: "Simpósio Brasileiro de Segurança da Informação e de Sistemas Computacionais",
       year: "2025",
       description:
@@ -38,7 +45,8 @@ export default function Publications() {
       url: "#",
     },
     {
-      title: "Codefólio: Construção de Portfólios e Compartilhamento de Conhecimentos através da Extensão Universitária",
+      title:
+        "Codefólio: Construção de Portfólios e Compartilhamento de Conhecimentos através da Extensão Universitária",
       journal: "Simpósio Brasileiro de Informática na Educação",
       year: "2025",
       description:
@@ -71,11 +79,14 @@ export default function Publications() {
     },
   ]
 
+  // Determina quais publicações mostrar com base no estado
+  const displayedPublications = showAll ? publications : publications.slice(0, 3)
+
   return (
     <section className="mb-16">
       <h2 className="text-2xl font-semibold mb-6">Publicações Científicas</h2>
       <div className="space-y-6">
-        {publications.map((pub, index) => (
+        {displayedPublications.map((pub, index) => (
           <PublicationCard
             key={index}
             title={pub.title}
@@ -85,6 +96,22 @@ export default function Publications() {
           />
         ))}
       </div>
+
+      {publications.length > 3 && (
+        <div className="mt-8 flex justify-center">
+          <Button variant="outline" onClick={() => setShowAll(!showAll)} className="flex items-center gap-2">
+            {showAll ? (
+              <>
+                Ver menos <ChevronUp className="h-4 w-4" />
+              </>
+            ) : (
+              <>
+                Ver mais <ChevronDown className="h-4 w-4" />
+              </>
+            )}
+          </Button>
+        </div>
+      )}
     </section>
   )
 }
