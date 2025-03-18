@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/AboutSection.jsx", "components/SkillCard.jsx", "components/SoftSkillCard.jsx", "components/ProfileHeader.jsx", "app/page.tsx"],
   "exclude": ["node_modules"]
 }
